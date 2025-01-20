@@ -28,8 +28,7 @@
 ![Про додаток](https://res.cloudinary.com/ddocl1wnp/image/upload/v1737393616/841bb69d-2aea-4e27-a648-1261344be333.png)
 ### Про автора
 ![Про автора](https://res.cloudinary.com/ddocl1wnp/image/upload/v1737393634/2c66b76b-4ca1-422f-9432-ecd6da6839d2.png)
-Ліцензія
-MIT LICENSE
+## Ліцензія MIT LICENSE
 Copyright (c) 2025 Aernjdz
 
 Дозвіл цим надається безкоштовно будь-якій особі, яка отримує копію
