@@ -13,15 +13,21 @@
 - Node.js
 - HTML
 - CSS
-# Встановлення
+## Встановлення
 Клонуйте репозиторій: `git clone https://github.com/aernjdz/fire_fly_app_windows.git`
 Перейдіть до директорії проекту: `cd fire_fly_app_windows`
 Встановіть залежності: `npm install`
 Запустіть додаток: `npm start`
 
-# Скріншоти
+## Скріншоти
+### Головна сторінка
 ![Головна сторінка](https://res.cloudinary.com/ddocl1wnp/image/upload/v1737393560/def60254-c40b-4873-b711-52ab6dbe3c8c.png)
-
+### Графік
+![Графік](https://res.cloudinary.com/ddocl1wnp/image/upload/v1737393595/f5c23eda-258d-4d86-ab86-ee79399a9b7b.png)
+### Про додаток
+![Про додаток](https://res.cloudinary.com/ddocl1wnp/image/upload/v1737393616/841bb69d-2aea-4e27-a648-1261344be333.png)
+### Про автора
+![Про автора](https://res.cloudinary.com/ddocl1wnp/image/upload/v1737393634/2c66b76b-4ca1-422f-9432-ecd6da6839d2.png)
 Ліцензія
 MIT LICENSE
 Copyright (c) 2025 Aernjdz
