@@ -1,8 +1,8 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "FireFly",
-  "version": "0.1.0",
-  "identifier": "com.FireFly.dev",
+  "version": "0.1.1",
+  "identifier": "com.FireFly.aernjdz.relise",
   "build": {
     "frontendDist": "../build",
     "devUrl": "http://localhost:3000",
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "FireFly",
+        "title": "Світлячок - Графіки Вимкнення Світла",
         "width": 800,
         "height": 600,
         "resizable": true,
