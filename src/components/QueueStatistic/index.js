@@ -14,7 +14,7 @@ const QueueStatistic = () => {
   const [inactiveTimenext, setInactiveTimenext] = useState(0);
   const [activeTimenext, setActiveTimenext] = useState(0);
   const [currentIntervalStatus, setCurrentIntervalStatus] = useState(null);
-
+const mus = [];
   // Fetch queue statistics from API
   useEffect(() => {
     const fetchQueueData = async () => {
