@@ -18,7 +18,8 @@
 Перейдіть до директорії проекту: `cd fire_fly_app_windows`
 Встановіть залежності: `npm install`
 Запустіть додаток: `npm start`
-#Скріншоти
+
+# Скріншоти
 ![Головна сторінка](https://res.cloudinary.com/ddocl1wnp/image/upload/v1737393560/def60254-c40b-4873-b711-52ab6dbe3c8c.png)
 
 Ліцензія
