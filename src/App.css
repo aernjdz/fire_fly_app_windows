@@ -131,13 +131,31 @@ body {
 
   border-radius: 28px;
 }
+.ag-courses-item_subqueue{
+ display: flex;
 
+ overflow: hidden;
+
+}
+
+.ag-courses-item_subqueue_link {
+  text-decoration: none;
+   display: block;
+   margin: 10px 10px 10px 10px;
+   padding: 20px 20px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+   background-color: rgba(255, 255, 255, .015);
+   backdrop-filter: blur(60px);
+   overflow: hidden;
+   cursor: default;
+ 
+   border-radius: 28px;
+ }
 .ag-courses-item_link {
- text-decoration: none;
   display: block;
   padding: 30px 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  background-color: rgba(255, 255, 255, .015);
+  background-color: rgba(62, 62, 62, 0.015);
   backdrop-filter: blur(60px);
   overflow: hidden;
   cursor: default;
@@ -161,18 +179,18 @@ body {
 }
 
 
-.ag-courses-item_link:hover .ag-courses-item_bg_green {
+.ag-courses-item_subqueue_link:hover .ag-courses-item_bg_green {
   -webkit-transform: scale(2);
   -ms-transform: scale(2);
   transform: scale(2);
 }
-.ag-courses-item_link:hover .ag-courses-item_bg_red {
+.ag-courses-item_subqueue_link:hover .ag-courses-item_bg_red {
   -webkit-transform: scale(2);
   -ms-transform: scale(2);
   transform: scale(2);
 }
 
-.ag-courses-item_link:hover .ag-courses-item_bg_yellow {
+.ag-courses-item_subqueue_link:hover .ag-courses-item_bg_yellow {
   -webkit-transform: scale(2);
   -ms-transform: scale(2);
   transform: scale(2);
@@ -186,6 +204,20 @@ body {
 
   font-weight: bold;
   font-size: 30px;
+  color: #FFF;
+
+  z-index: 2;
+  position: relative;
+}
+.ag-courses-item_subqueue_title {
+  text-align: center;
+  min-height: 45px;
+  
+
+  overflow: hidden;
+
+  font-weight: bold;
+  font-size: 24px;
   color: #FFF;
 
   z-index: 2;
@@ -236,19 +268,7 @@ text-align: center;
   margin: 5px 5px 5px;
   padding: 2px 2px 2px;
 }
-.item_title{
-  min-height: 60px;
-  margin: 0 25px 0px;
 
-  overflow: hidden;
-text-align: center;
-  font-weight: bold;
-  font-size: 30px;
-  color: #FFF;
-
-  z-index: 2;
-  position: relative;
-}
 .ag-courses-item_date-box {
   font-size: 18px;
   color: #FFF;
@@ -256,8 +276,8 @@ text-align: center;
   z-index: 2;
   position: relative;
 }
-.ag-courses-item_date {
-  
+.ag-courses-item_subqueue_date {
+ justify-content: center;
   font-weight: bold;
   color: #ffffff;
 
@@ -268,12 +288,12 @@ a{
   text-decoration: none;
 }
 
-.ag-courses_item .ag-courses-item_bg_green {
+.ag-courses_item_subqueue .ag-courses-item_bg_green {
   height: 128px;
   width: 128px;
   background-color: #3ecd5e;
 
-  z-index: 1;
+  z-index: -2;
   position: absolute;
   top: -75px;
   right: -75px;
@@ -284,7 +304,22 @@ a{
   -o-transition: all .5s ease;
   transition: all .5s ease;
 }
+.ag-courses_item .ag-courses-item_bg_green {
+  height: 128px;
+  width: 128px;
+  background-color: #3ecd5e;
 
+  z-index: -2;
+  position: absolute;
+  top: -75px;
+  right: -75px;
+
+  border-radius: 50%;
+  animation: pulse-shadow_green 5s infinite ease-in-out;
+  -webkit-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  transition: all .5s ease;
+}
 
 .green {
 
@@ -307,7 +342,19 @@ color: #3ecd5e;
   font-size: medium;
 
 }
+.item_title{
+  min-height: 60px;
+  margin: 0 25px 0px;
 
+  overflow: hidden;
+text-align: center;
+  font-weight: bold;
+  font-size: 30px;
+  color: #FFF;
+
+  z-index: 2;
+  position: relative;
+}
 .item-info {
 
 text-align: center;
@@ -344,7 +391,7 @@ text-align: center;
   width: 128px;
   background-color: #f8e621;
 
-  z-index: 1;
+  z-index: -2;
   position: absolute;
   top: -75px;
   right: -75px;
@@ -361,7 +408,28 @@ text-align: center;
   /* Initial state without pulsation */
   animation: pulse-shadow_yellow 1.5s infinite ease-in-out;
 }
+.ag-courses_item_subqueuem .ag-courses-item_bg_yellow {
+  height: 128px;
+  width: 128px;
+  background-color: #f8e621;
 
+  z-index: -2;
+  position: absolute;
+  top: -75px;
+  right: -75px;
+
+  border-radius: 50%;
+
+  /* Add shadow */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+
+  -webkit-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  transition: all .5s ease;
+
+  /* Initial state without pulsation */
+  animation: pulse-shadow_yellow 1.5s infinite ease-in-out;
+}
 /* Keyframes for pulsating shadow */
 @keyframes pulse-shadow_yellow {
   0% {
@@ -376,12 +444,27 @@ text-align: center;
 }
 
 
-
+.ag-courses_item_subqueue .ag-courses-item_bg_red {
+  background-color: #cd3e3e;
+  height: 128px;
+  width: 128px;
+  z-index: -2;
+  position: absolute;
+  top: -75px;
+  right: -75px;
+  border-radius: 50%;
+  -webkit-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  transition: all .5s ease;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  /* Initial state without pulsation */
+  animation: pulse-shadow_red 1.5s infinite ease-in-out;
+}
 .ag-courses_item .ag-courses-item_bg_red {
   background-color: #cd3e3e;
   height: 128px;
   width: 128px;
-  z-index: 1;
+  z-index: -2;
   position: absolute;
   top: -75px;
   right: -75px;

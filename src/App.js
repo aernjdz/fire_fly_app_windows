@@ -17,7 +17,7 @@ function App() {
           <Route path="/about" element={<AboutWindow />} />
           <Route path="/about/author" element={<DeveloperWindow />} />
           <Route path="/settings" element={<SettingsWindow />} />
-          <Route path="/queues/cherga/:id" element={<QueueStatistic />} />  {/* Add the new route */}
+          <Route path="/queues/cherga/:id/:subid" element={<QueueStatistic />} />  {/* Add the new route */}
         </Route>
       </Routes>
   );

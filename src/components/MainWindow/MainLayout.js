@@ -4,53 +4,64 @@ import { FlipClock } from "../clock";
 import { Link } from "react-router-dom";
 import { FaMountainCity } from "react-icons/fa6";
 import { FaCircle } from "react-icons/fa";
-const MainLayout = () => {
-    const [queues, setQueues] = useState([]); 
-    const [loading, setLoading] = useState(true); 
-    const [currentDate, setCurrentDate] = useState("");
-    const [preloaderWait, setPreloaderWait] = useState(true); // Затримка для прелоадера
 
-   
-    useEffect(() => {
+const MainLayout = () => {
+    const [queues, setQueues] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [currentDate, setCurrentDate] = useState("");
+    const [, setForceUpdate] = useState(0); // For forcing re-render to update countdown
+
+    const fetchData = async () => {
         const now = new Date();
         const formattedDate = now.toISOString().split("T")[0];
         setCurrentDate(formattedDate);
 
-        axios
-            .get("https://68c3b280-abb4-4a66-954c-06e5aa9f26a1-00-dkwlxpl3bkvn.janeway.replit.dev/api/getQueues", {
-                headers: {
-                    Accept: "application/json",
-                },
-            })
-            .then((response) => {
-                const currentData =
-                    response.data.dates.find((d) => d.date === formattedDate)?.data || [];
-                setQueues(currentData);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.error("Error fetching data:", error);
-                setLoading(false);
-            });
+        try {
+            const response = await axios.get(
+                "https://raw.githubusercontent.com/aernjdz/firefly/refs/heads/main/outages/latest/data.json",
+                {
+                    headers: { Accept: "application/json" }
+                }
+            );
 
-        setTimeout(() => {
-            setPreloaderWait(false);
-        }, 3000); // 3-second wait
+            const transformedQueues = Object.entries(response.data.queues).map(([queueNum, subQueues]) => ({
+                queue: queueNum,
+                subQueues: subQueues.map(subQueue => ({
+                    name: subQueue.name_queue,
+                    times: subQueue.times || []
+                }))
+            }));
 
-
-    }, []);
+            setQueues(transformedQueues);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        const timer = setInterval(() => {
-            setQueues((prevQueues) => [...prevQueues]); // Перерендер
-        }, 1000); // Оновлення кожну хвилину
+        fetchData(); // Initial fetch
 
-        return () => clearInterval(timer); // Очищення таймера при демонтажі
+        // Update countdown every second
+        const countdownInterval = setInterval(() => {
+            setForceUpdate(prev => prev + 1);
+        }, 1000);
+
+        // Fetch new data every 5 minutes
+        const dataFetchInterval = setInterval(() => {
+            fetchData();
+        }, 5 * 60 * 1000);
+
+        return () => {
+            clearInterval(countdownInterval);
+            clearInterval(dataFetchInterval);
+        };
     }, []);
 
-
-    // Перевірка активності інтервалу часу
     const isTimeActive = (interval) => {
+        if (!interval) return false;
+        
         const [start, end] = interval.split("-").map((time) => {
             const [hours, minutes] = time.trim().split(":").map(Number);
             const now = new Date();
@@ -58,16 +69,16 @@ const MainLayout = () => {
         });
 
         const now = new Date();
-        // Якщо зараз між кінцем інтервалу і 30 хвилинами після нього, вважаємо, що енергія можливо відновлена
         if (now >= end && now <= new Date(end.getTime() + 60 * 60 * 1000)) {
-            return "wait"; // Повідомлення для інтервалу після його завершення
+            return "wait";
         }
 
-        return now >= start && now < new Date(end.getTime() + 60000); // Включаючи кінець
+        return now >= start && now < new Date(end.getTime() + 60000);
     };
 
-// Отримати час, що залишився
     const getTimeRemaining = (interval) => {
+        if (!interval) return null;
+
         const [_, end] = interval.split("-").map((time) => {
             const [hours, minutes] = time.trim().split(":").map(Number);
             const now = new Date();
@@ -77,50 +88,84 @@ const MainLayout = () => {
         const now = new Date();
         const remainingTime = end - now;
 
-        // If the interval has not ended yet, return the remaining time
         if (remainingTime > 0) {
             const totalSeconds = Math.floor(remainingTime / 1000);
-            const minutes = Math.floor((remainingTime / 1000 / 60) % 60);
-            const hours = Math.floor(remainingTime / 1000 / 60 / 60);
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
             const seconds = totalSeconds % 60;
-            return { type: "off", message: `${hours > 0 ? hours + "год" : ""} ${minutes} хв ${seconds} с` };
+            return { 
+                type: "off", 
+                message: `${hours > 0 ? `${hours}год ` : ""}${minutes}хв ${seconds}с` 
+            };
         }
 
-        // If we're within 30 minutes after the interval ends
         if (now >= end && now <= new Date(end.getTime() + 60 * 60 * 1000)) {
-            const remainingAfterEnd = new Date(end.getTime() + 60 * 60 * 1000) - now;
-            const remainingMinutes = Math.floor(remainingAfterEnd / 1000 / 60);
-            const totalSeconds = Math.floor(remainingAfterEnd / 1000);
-            const remainingSeconds = totalSeconds % 60;
-            
-            return { type: "Wait", message: `Можливо заживлено. (${remainingMinutes} хв ${remainingSeconds} c)` };
+            const waitTime = new Date(end.getTime() + 60 * 60 * 1000) - now;
+            const minutes = Math.floor(waitTime / 60000);
+            const seconds = Math.floor((waitTime % 60000) / 1000);
+            return { 
+                type: "Wait", 
+                message: `Можливо заживлено (${minutes}хв ${seconds}с)` 
+            };
         }
 
         return null;
     };
-
-// Find the next interval
     const getNextInterval = (times) => {
+        if (!times || !times.length) return null;
+        
         const now = new Date();
-        let closestInterval = null;
-
-        for (const interval of times) {
+        return times.reduce((closest, interval) => {
             const [start] = interval.split("-").map((time) => {
                 const [hours, minutes] = time.trim().split(":").map(Number);
                 return new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes);
             });
 
-            if (now < start) {
-                if (!closestInterval || start < closestInterval.start) {
-                    closestInterval = { interval, start };
-                }
+            if (now < start && (!closest || start < closest.start)) {
+                return { interval, start };
             }
-        }
-
-        return closestInterval ? closestInterval.interval : null;
+            return closest;
+        }, null)?.interval;
     };
-
-
+    const getQueueStatus = (subQueues) => {
+        // Count how many subqueues are currently without power
+        const outageCount = subQueues.reduce((count, subQueue) => {
+            const hasActiveOutage = subQueue.times.some(interval => {
+                const status = isTimeActive(interval);
+                return status && status !== "wait"; // Only count full outages, not "wait" status
+            });
+            return hasActiveOutage ? count + 1 : count;
+        }, 0);
+    
+        // Determine status class based on outage count
+        if (outageCount === 0) {
+            return "ag-courses-item_bg_green";  // All powered
+        } else if (outageCount === 1) {
+            return "ag-courses-item_bg_yellow";  // One subqueue without power
+        } else {
+            return "ag-courses-item_bg_red";    // Two or more subqueues without power
+        }
+    };
+    const getSubQueueStatus = (times) => {
+        // Check if there's any active outage for this subqueue
+        const hasActiveOutage = times.some(interval => {
+            const status = isTimeActive(interval);
+            return status && status !== "wait";
+        });
+    
+        if (hasActiveOutage) {
+            return "ag-courses-item_bg_red";    // Active outage
+        }
+        
+        // Check if there's a waiting period
+        const hasWaitingPeriod = times.some(interval => isTimeActive(interval) === "wait");
+        if (hasWaitingPeriod) {
+            return "ag-courses-item_bg_yellow";  // In waiting period
+        }
+        
+        return "ag-courses-item_bg_green";      // No outages
+    };
+    
     if (loading) {
         return (
             <div className="preloader">
@@ -134,67 +179,67 @@ const MainLayout = () => {
 
     }
 
+
     return (
         <div className="grid">
-
             <div className="ag-format-container">
-                <div className="item_title">Черги ​погодинних відключень у​ Рівненській області</div>
+                <div className="item_title">Черги погодинних відключень у Рівненській області</div>
                 <div className="ag-time-item_link">
                     <div className="ag-time-item_date-box">
                         <div className="ag-time-item_title">
-                            <FlipClock/>
+                            <FlipClock />
                         </div>
                     </div>
                 </div>
-                <div className={"item-info"}>
-                    <span className={"green"}>
-                        <FaCircle/>
-                    </span>Заживлені
-                    <span className={"red"}>
-                        <FaCircle/>
-                    </span>Відключені
-                    <span className={"yellow"}>
-                        <FaCircle/>
-                    </span>
-                    Можливо
+                <div className="item-info">
+                    <span className="green"><FaCircle /></span>Заживлені
+                    <span className="red"><FaCircle /></span>Відключені
+                    <span className="yellow"><FaCircle /></span>Можливо
                 </div>
 
                 <div className="ag-courses_box">
                     {queues.map((queue) => {
-                        const activeInterval = queue?.times.find(isTimeActive);
-                        const nextInterval = getNextInterval(queue.times);
-                        const statusClass =
-                            activeInterval
-                                ? getTimeRemaining(activeInterval)?.type === "Wait"
-                                    ? "ag-courses-item_bg_yellow" // Yellow if it's in the 'wait' period
-                                    : "ag-courses-item_bg_red" // Red if the interval is active
-                                : "ag-courses-item_bg_green"; // Green if no active interval
-
+                        const queueStatusClass = getQueueStatus(queue.subQueues);
+                        
                         return (
                             <div key={queue.queue} className="ag-courses_item">
-                                <Link to={`/queues/cherga/${queue.queue}`} className="ag-courses-item_link">
-                                    <div className={statusClass}></div>
+                                <div className="ag-courses-item_link">
+                                    <div className={queueStatusClass}></div>
                                     <div className="ag-courses-item_title">
                                         <span className="ag-courses-item_title_ico">
-                                            <FaMountainCity/>
+                                            <FaMountainCity />
                                         </span>
                                         <span>Черга №{queue.queue}</span>
                                     </div>
-                                    <div className="ag-courses-item_date-box">
-                                       <span className="ag-courses-item_date">
-                            {activeInterval
-                                ? getTimeRemaining(activeInterval)?.type === "off"
-                                    ? `🔴 (Залишилось: ${getTimeRemaining(activeInterval).message})` :
-                                    getTimeRemaining(activeInterval)?.type === "Wait"
-                                        ? `🟡  ${getTimeRemaining(activeInterval).message}`
-                                        : `🟡  ${getTimeRemaining(activeInterval).message}`
-                                : nextInterval
-                                    ? `Найближчий: ${nextInterval}`
-                                    : "Немає Відключень 🟢"}
-</span>
-
+                                    <div className="ag-courses_item_subqueue">
+                                        {queue.subQueues.map((subQueue, index) => {
+                                            const subQueueStatusClass = getSubQueueStatus(subQueue.times);
+                                            
+                                            return (
+                                                <Link to={`/queues/cherga/${queue.queue}/${subQueue.name}`} key={subQueue.name} className="ag-courses-item_subqueue_link">
+                                                    <div className={subQueueStatusClass}></div>
+                                                    <div className="ag-courses-item_subqueue_title">
+                                                        <span className="ag-courses-item_title_ico">
+                                                            <FaMountainCity />
+                                                        </span>
+                                                        <span>№{subQueue.name}</span>
+                                                    </div>
+                                                    <span className="ag-courses-item_subqueue_date">
+                                                        {subQueue.times.length > 0 ? (
+                                                            isTimeActive(subQueue.times[0])
+                                                                ? getTimeRemaining(subQueue.times[0])?.type === "off"
+                                                                    ? `🔴 (Залишилось: ${getTimeRemaining(subQueue.times[0]).message})`
+                                                                    : `🟡 ${getTimeRemaining(subQueue.times[0]).message}`
+                                                                : getNextInterval(subQueue.times)
+                                                                    ? `Найближчий: ${getNextInterval(subQueue.times)}`
+                                                                    : "Немає Відключень 🟢"
+                                                        ) : "Немає Відключень 🟢"}
+                                                    </span> 
+                                                </Link>
+                                            );
+                                        })}
                                     </div>
-                                </Link>
+                                </div>
                             </div>
                         );
                     })}
