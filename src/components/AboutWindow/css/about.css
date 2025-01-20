@@ -1,0 +1,216 @@
+@import url('https://fonts.cdnfonts.com/css/tt-firs-neue-trl');
+body {
+    background-color: #18181B;
+   
+      font-family: 'TT Firs Neue Trl', sans-serif;
+      font-family: 'TT Firs Neue Trial Var Roman', sans-serif;
+    
+  }
+  
+ 
+
+
+
+h2{
+    color: rgba(255, 255, 255, 0.7);
+}
+.container_about{
+    transform: scale(0.95); /* Зменшення масштабу до 90% */
+    transform-origin: top center; /* Встановлення точки відліку */
+    margin-top: 10px;
+    margin-bottom: 40px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    justify-items: center;
+    width: 95vw;
+}
+
+.about-info-bg{
+  border-radius: 25px;
+  background-color: #26262a;
+  margin: 10px 10px 10px;
+
+  color:white;
+  padding: 15px;
+  box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.1);
+  transition: opacity .3s ease;
+  border-radius: 5px;
+}
+
+
+
+
+.author-info-container {
+    transform: scale(0.95); /* Зменшення масштабу до 90% */
+    margin-top: 15vh;
+    display: flex;
+    justify-items: center;
+}
+
+.author-info{
+
+  text-align: left;
+}
+.author-info h3{
+  color:white;
+}
+
+/* For mobile (phone), stack the items in a column */
+@media (max-width: 1024px) {
+  .author-info-container {
+    
+    margin-top: 10vh;
+    flex-wrap: wrap; /* Allow wrapping of items */
+  }
+  .author-photo img{
+    margin-bottom: 50px;
+  }
+}
+
+.label-info a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 2em;
+  margin: 5px 5px 5px;
+}
+
+@media (max-width: 767px) {
+  .author-info-container {
+    margin-top: 10vh;
+    flex-wrap: wrap;
+  }
+}
+
+.author-photo{
+  width: 100vw;
+}
+.author-photo img {
+  width: 60%;
+  border-radius: 50%;
+}
+.author-photo-info h1 {
+ color: rgb(255 255 255 / 70%);
+}
+.author-photo-info .label-info div{
+
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  color: rgb(255 255 255 / 70%);
+}
+.author-photo-info .label-info div img{
+  width: 35px; /* Adjust size */
+  height: 35px; /* Adjust size */
+}
+.author-photo-info div p{
+  color: rgb(255 255 255 / 70%);
+}
+.author-photo-info .label-info div p{
+  font-size: 14px;
+  padding: 8px 8px 8px;
+  border-radius: 5px;
+  margin: 0;
+  background-color: #26262a;
+  margin: 5px 5px 5px;
+}
+.label-info {
+  display: flex;
+  justify-content: center;  /* Centers the items horizontally */
+  align-items: center;      /* Centers the items vertically */
+}
+
+.faq-item p {
+  cursor: pointer;
+  font-size: 16px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+
+/* Styling the arrow */
+.arrow {
+  transition: transform 0.3s ease;
+}
+
+.arrow.open {
+  transform: rotate(180deg); /* Rotates the arrow when open */
+}
+
+
+.btn-custom{
+    background-color: rgba(255,255,255,0.08);
+    color: rgba(255, 255, 255, 0.7);
+    margin: 5px 5px 5px;
+    border: none;
+}
+.btn-custom ::before{
+    background-color: rgba(255,255,255,0.08);
+    color: rgba(255, 255, 255, 0.7);
+    margin: 5px 5px 5px;
+    border: none;
+}
+.btn-custom :hover{
+    background-color: rgba(255,255,255,0.08);
+    color: rgba(255, 255, 255, 0.7);
+    margin: 5px 5px 5px;
+    border: none;
+}
+.btn-custom:focus{
+    background-color: #2b7647;
+    color: rgba(255, 255, 255, 0.7);
+}
+ .btn-custom:focus{
+    background-color: #2b7647;
+    color: rgba(255, 255, 255, 0.7);
+    border: none;
+ }
+
+.btn-custom.active {
+    transition: background .4s ease, opacity .4s ease;
+    background-color: #2b7647;
+    color: white;
+}
+
+
+
+
+
+.about-alert{
+    margin: 10px 10px 10px;
+    background-color: rgba(249, 168, 37, 0.3);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 15px;
+    box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.1);
+    transition: opacity .3s ease;
+    border-radius: 5px;
+  }
+  .about-alert p {
+    padding: 0;
+    margin: 0;
+
+  }
+
+  .about-info {
+    margin: 10px 10px 10px;
+    background-color: #505050;
+    color:white;
+    padding: 15px;
+    box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.1);
+    transition: opacity .3s ease;
+    border-radius: 5px;
+  }
+
+  .about-info h3 span{
+    color: #2b7647;
+    font-weight: bold;
+  }
+
+#root{
+  margin:auto;
+}

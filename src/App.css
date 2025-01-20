@@ -1,38 +1,721 @@
-.App {
+
+.ag-format-container {
+  width: 1142px;
+  margin: 0 auto;
+  
+
+}
+
+body{
+  display: flex;
+  justify-content: center;
+}
+.separator {
+  display: flex;
+  align-items: center;
+  font-size: 25px;
+  font-family: 'Droid Sans Mono', monospace;
+  color: #ffffff;
+  margin: 0 5px; /* Регулювання відступів */
+  animation: blink 1s infinite; /* Застосування анімації миготіння */
+}
+
+.container{
+  margin: 0;
+ 
+}
+/* Кадри для анімації blink */
+@keyframes blink {
+  0%, 100% {
+    opacity: 1; /* Видимий стан */
+  }
+  50% {
+    opacity: 0; /* Невидимий стан для миготіння */
+  }
+}
+
+/* Стилізація SVG */
+/* Centering the preloader */
+.preloader {
+  position: absolute; /* Фіксується до вікна перегляду */
+  top: 50vh; /* Центрування по вертикалі */
+  left: 50vw; /* Центрування по горизонталі */
+  transform: translate(-50%, -50%); /* Зміщення назад на 50% власної ширини та висоти */
+  width: 120px;
+  height: 120px;
+  z-index: 1000; /* Забезпечує, щоб елемент був поверх іншого контенту */
+}
+
+.preloader h6{
+  color: white;
+}
+/* Анімація кольору */
+.preloader path {
+  animation: gradientFill 1s infinite alternate; /* Анімація зеленого градієнта */
+}
+
+@keyframes gradientFill {
+
+  0% {
+    fill: #FFFFFF;
+  }
+  50%{
+    fill:#89ce22;
+  }
+  100% {
+    fill: #2df673; /* Яскраво-зелений */
+  }
+}
+
+/* Анімація підскоку */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0); /* Початкова та кінцева позиція */
+  }
+  50% {
+    transform: translateY(-10px); /* Підскок вгору */
+  }
+}
+
+.grid {
+  display: flex;
+
+ justify-content: center;
+
+
+
+  padding-top: 0;
+}
+body {
+  background-color: #18181B; /*#18181B;*/
+  margin: 0;
+
+}
+.ag-courses_box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+
+  padding: 50px 0 0 0 0;
+}
+
+.dateDisplay {
+  font-size: 20px; /* Розмір шрифта */
+  font-family: 'Arial', sans-serif; /* Шрифт */
+
+  text-align: center; /* Вирівнювання тексту по центру */
+  margin-bottom: 10px; /* Відступ знизу */
+  padding: 10px; /* Відступи всередині елемента */
+
+ 
+}
+
+@media (max-width: 768px) {
+  .dateDisplay {
+    font-size: 18px; /* Зменшити розмір шрифта для мобільних пристроїв */
+    padding: 8px; /* Зменшити відступи */
+  }
+}
+
+.ag-courses_item {
+   flex-basis: calc(33.3333% - 20px); /* 3 items per row */
+    margin: 0 10px 30px;
+
+
+  overflow: hidden;
+
+  border-radius: 28px;
+}
+
+.ag-courses-item_link {
+ text-decoration: none;
+  display: block;
+  padding: 30px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, .015);
+  backdrop-filter: blur(60px);
+  overflow: hidden;
+  cursor: default;
+  position: relative;
+ 
+}
+
+@media only screen and (max-width: 979px) {
+  .ag-courses_item {
+    flex-basis: calc(33.3333% - 20px); /* 3 items per row */
+    margin: 0 10px 30px; /* Adjust margins to fit spacing */
+  }
+
+}
+
+@media only screen and (max-width: 639px) {
+  .ag-courses_item {
+    flex-basis: calc(33.3333% - 20px); /* 3 items per row */
+    margin: 0 10px 20px; /* Adjust margins for smaller screens */
+  }
+}
+
+
+.ag-courses-item_link:hover .ag-courses-item_bg_green {
+  -webkit-transform: scale(2);
+  -ms-transform: scale(2);
+  transform: scale(2);
+}
+.ag-courses-item_link:hover .ag-courses-item_bg_red {
+  -webkit-transform: scale(2);
+  -ms-transform: scale(2);
+  transform: scale(2);
+}
+
+.ag-courses-item_link:hover .ag-courses-item_bg_yellow {
+  -webkit-transform: scale(2);
+  -ms-transform: scale(2);
+  transform: scale(2);
+}
+.ag-courses-item_title {
+  text-align: center;
+  min-height: 87px;
+  margin: 0 0 25px;
+
+  overflow: hidden;
+
+  font-weight: bold;
+  font-size: 30px;
+  color: #FFF;
+
+  z-index: 2;
+  position: relative;
+}
+.ag-time-item_link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.ag-time-item_date-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.ag-time-item_title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.ag-time-item_title {
   display: flex;
-  flex-direction: column;
+
+  align-items: baseline;
+  flex-direction: row;
+  margin-top: 25px;
+  padding-left: 25px;
+  padding-right: 25px;
+  overflow: hidden;
+text-align: center;
+  font-weight: bold;
+  font-size: 30px;
+  color: #FFF;
+
+  z-index: 2;
+  position: relative;
+}
+
+.ag-courses-item_title_ico{
+  margin: 5px 5px 5px;
+  padding: 2px 2px 2px;
+}
+.item_title{
+  min-height: 60px;
+  margin: 0 25px 0px;
+
+  overflow: hidden;
+text-align: center;
+  font-weight: bold;
+  font-size: 30px;
+  color: #FFF;
+
+  z-index: 2;
+  position: relative;
+}
+.ag-courses-item_date-box {
+  font-size: 18px;
+  color: #FFF;
+  text-align: center;
+  z-index: 2;
+  position: relative;
+}
+.ag-courses-item_date {
+  
+  font-weight: bold;
+  color: #ffffff;
+
+ 
+}
+
+a{
+  text-decoration: none;
+}
+
+.ag-courses_item .ag-courses-item_bg_green {
+  height: 128px;
+  width: 128px;
+  background-color: #3ecd5e;
+
+  z-index: 1;
+  position: absolute;
+  top: -75px;
+  right: -75px;
+
+  border-radius: 50%;
+  animation: pulse-shadow_green 5s infinite ease-in-out;
+  -webkit-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  transition: all .5s ease;
+}
+
+
+.green {
+
+color: #3ecd5e;
+  border-radius: 50%; /* To add a circular glow effect */
+  font-size: medium;
+
+}
+.red {
+
+  color: #cd3e3e;
+  border-radius: 50%; /* To add a circular glow effect */
+  font-size: medium;
+
+}
+.yellow {
+
+  color:  #f8e621;
+  border-radius: 50%; /* To add a circular glow effect */
+  font-size: medium;
+
+}
+
+.item-info {
+
+text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 15px;
+ 
+  transition: opacity .3s ease;
+  border-radius: 5px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.item-info{
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+@keyframes pulse-shadow_green {
+  0% {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Normal shadow */
+  }
+  50% {
+    box-shadow: 0 0 20px 5px rgba(2, 253, 15, 0.4); /* Larger yellow shadow */
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Normal shadow */
+  }
+}
+
+.ag-courses_item .ag-courses-item_bg_yellow {
+  height: 128px;
+  width: 128px;
+  background-color: #f8e621;
+
+  z-index: 1;
+  position: absolute;
+  top: -75px;
+  right: -75px;
+
+  border-radius: 50%;
+
+  /* Add shadow */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+
+  -webkit-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  transition: all .5s ease;
+
+  /* Initial state without pulsation */
+  animation: pulse-shadow_yellow 1.5s infinite ease-in-out;
+}
+
+/* Keyframes for pulsating shadow */
+@keyframes pulse-shadow_yellow {
+  0% {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Normal shadow */
+  }
+  50% {
+    box-shadow: 0 0 30px 10px rgba(248, 230, 33, 0.4); /* Larger yellow shadow */
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Normal shadow */
+  }
+}
+
+
+
+.ag-courses_item .ag-courses-item_bg_red {
+  background-color: #cd3e3e;
+  height: 128px;
+  width: 128px;
+  z-index: 1;
+  position: absolute;
+  top: -75px;
+  right: -75px;
+  border-radius: 50%;
+  -webkit-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  transition: all .5s ease;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  /* Initial state without pulsation */
+  animation: pulse-shadow_red 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse-shadow_red {
+  0% {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Normal shadow */
+  }
+  50% {
+    box-shadow: 0 0 30px 10px rgba(248, 33, 33, 0.4); /* Larger yellow shadow */
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Normal shadow */
+  }
+}
+
+
+@media only screen and (max-width: 979px) {
+  .ag-courses_item {
+    -ms-flex-preferred-size: calc(50% - 30px);
+    flex-basis: calc(50% - 30px);
+  }
+  .ag-courses-item_title {
+    font-size: 24px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .ag-format-container {
+    width: 96%;
+  }
+
+}
+@media only screen and (max-width: 639px) {
+  .ag-courses_item {
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+  }
+  .ag-courses-item_title {
+    min-height: 72px;
+    line-height: 1;
+
+    font-size: 24px;
+  }
+  .ag-courses-item_link {
+    padding: 22px 40px;
+  }
+  .ag-courses-item_date-box {
+    font-size: 14px;
+  }
+ 
+}
+
+/* Initial state of the menu - hidden off-screen */
+.tab-menu-container {
+  position: fixed;
+  bottom: -100px; /* Adjust to hide the menu off-screen */
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  transition: bottom 0.6s ease, opacity 0.6s ease; /* Smooth transition for both bottom and opacity */
+  opacity: 0; /* Initially hidden */
+}
+
+/* Show the menu when hovering near the bottom */
+.hover-zone:hover .tab-menu-container {
+  bottom: 0;
+  opacity: 1; /* Fully visible */
+}
+
+.hover-zone:hover .animarrow{
+  transition:  opacity .4s ease;
+  opacity: 0;
+}
+
+/* Set up the area to hover over */
+.hover-zone  {
+  position: fixed;
+  display: flex ;
+  justify-items: center;
   color: white;
+ align-items: center;
+  max-width: 100%; /* Set a max-width for the menu (optional) */
+ width: 100%;
+  height: 80px; /* Height of the hover area */
+  z-index: 10;
+ 
+
 }
 
-.App-link {
-  color: #61dafb;
+.tab-menu {
+  width: 100%; /* Ensure the tab menu spans the full width */
+  max-width: 800px; /* Set a max-width for the menu (optional) */
+  margin: 0 auto; /* Center it horizontally */
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(49, 50, 53, 0.5);
+  padding: 10px;
+  backdrop-filter: blur(20px);
+  margin-bottom: 2%;
+  border-radius: 25px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.tab-item {
+  transition: background .4s ease, opacity .4s ease;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  padding: 10px;
+  margin: 0 5px;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.tab-item.active {
+  transition: background .4s ease, opacity .4s ease;
+  background-color: #2b7647;
+  border-radius: 4px;
+  color: #fff;
+}
+/* Define the jump animation */
+@keyframes jump {
+  0% {
+    transform: translateY(0);
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    transform: translateY(-10px); /* Adjust the height of the jump */
   }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+
+/* Apply the animation to the element */
+.animarrow {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  left: 50vw;
+
+  font-size: 25px; /* Розмір шрифту */
+  padding: 0;
+  opacity: 1; /* Прозорість */
+  animation: jump 5s ease infinite; /* Анімація */
+  bottom: 25px; /* Відступ від нижнього краю */
+}
+
+
+.icon {
+  font-size: 24px;
+}
+
+
+.footer-content {
+  display: flex;
+  align-items: center;
+justify-content: center;
+  color: white;
+  text-align: center;
+  width: auto;
+}
+
+.footer {
+  text-align: center;
+  margin: 0;
+  padding: 16px; /* Optional padding for spacing */
+  background-color: #f8f8f8; /* Optional background color */
+}
+
+
+
+.footer-logo {
+  width: 35px; /* Adjust size */
+  height: 35px; /* Adjust size */
+
+}
+
+
+
+
+@import url('https://fonts.googleapis.com/css?family=Droid+Sans+Mono');
+.flipClock {
+  display: flex;
+  justify-content: center; /* Centers content horizontally */
+  align-items: center; /* Centers content vertically */
+  width: calc(3 * 50px + 30px); /* Adjust the width */
+  margin: 0 auto; /* Ensures it stays centered within its container */
+}
+
+
+.flipUnitContainer {
+  display: block;
+  position: relative;
+  width: 50px; /* Reduced from 100px */
+  height: 45px; /* Reduced from 90px */
+  perspective-origin: 50% 50%;
+  perspective: 300px;
+  background-color: #1c1c1f;
+  border-radius: 3px;
+  box-shadow: 0px 4px 4px -4px grey; /* Adjusted shadow for smaller size */
+}
+
+.upperCard,
+.lowerCard {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+  border: 1px solid rgb(51, 51, 51);
+}
+
+.upperCard span,
+.lowerCard span {
+  font-size: 1.5em; /* Reduced font size from 3em */
+  font-family: 'Droid Sans Mono', monospace;
+  font-weight: lighter;
+  color: #ffffff;
+}
+
+.upperCard {
+  align-items: flex-end;
+  border-bottom: 0.5px solid #1c1c1f;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.upperCard span {
+  transform: translateY(50%);
+}
+
+.lowerCard {
+  align-items: flex-start;
+  border-top: 0.5px solid #1c1c1f;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.lowerCard span {
+  transform: translateY(-50%);
+}
+
+.flipCard {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+
+.flipCard span {
+  font-family: 'Droid Sans Mono', monospace;
+  font-size: 1.5em; /* Reduced font size from 3em */
+  font-weight: lighter;
+  color: #ffffff;
+}
+
+.flipCard.unfold {
+  top: 50%;
+  align-items: flex-start;
+  transform-origin: 50% 0%;
+  transform: rotateX(180deg); /* from 180 to 0 */
+  background-color:#1c1c1f;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border: 0.5px solid #1c1c1f;
+  border-top: 0.5px solid #1c1c1f;
+}
+
+.flipCard.unfold span {
+  transform: translateY(-50%);
+}
+
+.flipCard.fold {
+  top: 0%;
+  align-items: flex-end;
+  transform-origin: 50% 100%;
+  transform: rotateX(0deg); /* from 0 to -180 */
+  background-color:#1c1c1f;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border: 0.5px solid #1c1c1f;
+  border-bottom: 0.5px solid #1c1c1f;
+}
+
+.flipCard.fold span {
+  transform: translateY(50%);
+}
+
+/* Animation for fold */
+.fold {
+  animation: fold 0.6s cubic-bezier(0.455, 0.03, 0.515, 0.955) forwards;
+  transform-style: preserve-3d;
+}
+
+/* Animation for unfold */
+.unfold {
+  animation: unfold 0.6s cubic-bezier(0.455, 0.03, 0.515, 0.955) forwards;
+  transform-style: preserve-3d;
+}
+
+@keyframes fold {
+  0% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(-180deg);
+  }
+}
+
+@keyframes unfold {
+  0% {
+    transform: rotateX(180deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+h1{
+  color:white;
 }

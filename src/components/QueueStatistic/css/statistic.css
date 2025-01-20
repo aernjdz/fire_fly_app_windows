@@ -1,0 +1,344 @@
+.schedule {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+ 
+}
+
+@import url('https://fonts.cdnfonts.com/css/tt-firs-neue-trl');
+
+
+body {
+  font-family: 'TT Firs Neue Trl', sans-serif;
+  font-family: 'TT Firs Neue Trial Var Roman', sans-serif;
+}
+
+.this_day{
+  margin-bottom: 50px;
+}
+.next_day{
+  margin-bottom: 80px;
+}
+
+.sub_title{
+  min-height: 60px;
+  margin: 0 25px 0px;
+
+  overflow: hidden;
+text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  color: #FFF;
+
+  z-index: 2;
+  position: relative;
+}
+
+
+.info_none {
+  display: grid;
+  place-items: center; /* Use grid to center content */
+  
+  text-align: center; /* Center the text */
+}
+.info_none_ico{
+  font-size: 45px;
+  color: white;
+}
+
+.info_none_title{
+  color: white;
+  font-size: 35px;
+}
+
+.color_info_box{
+  margin-top: 5px;
+  gap:10px;
+  display: flex;
+  justify-content: flex-start;
+  color: white;
+}
+
+.grid_stat {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr); /* 5 колонок у рядку */
+  gap: 10px;
+}
+
+
+.highlight {
+  position: relative; /* Відносне позиціонування для обчислення позиції "точки" */
+}
+
+
+.blinking_dot {
+  position: absolute;
+  bottom: 5px; /* Відступ знизу */
+  right: 5px; /* Відступ справа */
+  width: 10px;
+  height: 10px;
+  background-color: #ff5722; /* Колір точки */
+  border-radius: 50%;
+  animation: blink 1s infinite; /* Анімація блимання */
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+
+.column {
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.time {
+  color: #ffffff;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.status_green {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 60px;
+  height: 40px;
+  background-color: #1c7a35d2;
+  border-radius: 6px;
+  color: white;
+}
+.status_red {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 60px;
+  height: 40px;
+  background-color: #7a1c1c91;
+  border-radius: 6px;
+  color: white;
+}
+
+.info_block_info_title{
+ color: white;
+ font-size: 32px;
+ font-weight: bold;
+}
+.info_block_info_date{
+  color: #fff;
+}
+.info_blocks {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Default: 3 equal-width columns */
+  gap: 20px; /* Space between items */
+  align-items: start; /* Align items at the top */
+}
+
+@media (max-width: 998px) {
+  .info_blocks {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
+    gap: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .info_blocks {
+    grid-template-columns: 1fr; /* Single column for smaller screens */
+    gap: 10px;
+  }
+}
+
+.periods {
+  color: #ffffffc7;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  margin-top: 10px;
+}
+
+.periods_title {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .periods {
+    font-size: 14px; /* Smaller font for tablets */
+  }
+  .periods_title {
+    font-size: 16px; /* Adjust title size for smaller screens */
+  }
+}
+
+.time_st {
+  display: flex;
+  flex-wrap: wrap; /* Ensure time spans wrap on smaller screens */
+  gap: 10px;
+  justify-content: flex-start;
+  color: white;
+}
+
+.color_info_box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.color_info_box span {
+  font-size: 14px;
+}
+
+.status_green, .status_red {
+  width: 50px;
+  height: 35px;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .status_green, .status_red {
+    width: 40px;
+    height: 30px;
+    font-size: 12px;
+  }
+}
+
+
+/* Each info block will span a single column */
+.info_block_info {
+  display: grid;
+
+  gap: 10px; /* Add space between the columns inside */
+  align-items: center; /* Center items vertically */
+}
+.graf_info_title{
+  color: #fff ;
+}
+.Active_off{
+  font-size: 24px;
+        font-weight: 500;
+        line-height: 20.64px;
+        color: #708996;
+}
+.Active_on{
+  font-size: 24px;
+        font-weight: 500;
+        line-height: 20.64px;
+        color: #88ffbc;
+}
+.info_block{
+  display: flex;
+  flex-direction: column;
+}
+
+.periods {
+  color: #ffffffc7;
+ 
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  margin-top: 10px; /* Optional: Add space between the periods and surrounding elements */
+}
+.box_per{
+  display: flex;
+ 
+}
+.periods i {
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+  background: #3a3a38;
+  margin-right: 8px; /* Increased space between the icon and text */
+  display: inline-block;
+}
+
+
+
+@media (max-width: 998px) {
+  .periods {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 24px;
+  }
+}
+.periods_title {
+  font-size: 20px;
+    font-weight: 500;
+    line-height: 25.8px;
+    text-align: left;
+    margin: 0 0 16px 0;
+    padding: 0;
+    color: white;
+}
+
+.status.off {
+  background-color: #4a4a4a;
+  position: relative;
+}
+
+.status.off::after {
+  content: '✖';
+  color: #ffffff;
+  font-size: 16px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.status.active {
+  background-color: #4caf50;
+  position: relative;
+}
+
+.status.active::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Адаптивний дизайн */
+@media (max-width: 768px) {
+  .grid_stat {
+    grid-template-columns: repeat(5, 1fr); /* 3 колонки у рядку на планшетах */
+  }
+}
+
+@media (max-width: 480px) {
+  .grid_stat {
+    grid-template-columns: repeat(5, 1fr); /* 2 колонки у рядку на мобільних */
+  }
+}
+
+.this_day{
+  margin-top: 50px;
+}
