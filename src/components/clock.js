@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from 'axios';
+// import axios from 'axios';
 
 // Helper function to format digits
 const formatDigit = (digit) => (digit < 10 ? `0${digit}` : digit);
@@ -81,14 +81,15 @@ class FlipClock extends Component {
   // Fetch time from API
   async fetchTime() {
     try {
-      const response = await axios.get('https://timeapi.io/api/Time/current/zone', {
-        params: {
-          timezone: 'Europe/Kiev', // Kyiv timezone
-        }
-      });
-
-      const time = new Date(response.data.dateTime);
+      // const response = await axios.get('https://timeapi.io/api/Time/current/zone', {
+      //   params: {
+      //     timezone: 'Europe/Kiev', // Kyiv timezone
+      //   }
+      // });
+      const time = new Date(); // Fallback to system time
       this.updateTimeFromAPI(time);
+     // const time = new Date(response.data.dateTime);
+     // this.updateTimeFromAPI(time);
     } catch (error) {
       console.error('Error fetching time:', error);
       const time = new Date(); // Fallback to system time
